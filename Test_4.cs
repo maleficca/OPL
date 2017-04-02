@@ -71,9 +71,12 @@ namespace Test4
             char[] user1array = user1.ToCharArray();
             char[] user2array = user2.ToCharArray();
 
+            // Displaying the array of chars
             foreach (char x in user1array) Console.Write(x + " ");
             Console.WriteLine();
             foreach (char x in user2array) Console.Write(x + " ");
+            
+            // Awaiting user input
             Console.Read();
         }
     }
