@@ -1,6 +1,9 @@
 # OPL
 On this repository you can find working code for every OPL instruction we'll be doing on classes. Please use it as a base and asset in creating your own code. Before you start working on it please read the notes below, as they contain useful information for understanding the instruction and the code itself.
 
+# TEST_2
+The BBP formula should always calculate the Pi value with higher accuracy. The most difficult part of this code is typing the long formula with many variables, so make sure you get that part right.
+
 # TEST_3
 The uploaded code is made using an old instruction where you have to declare a List and do operations on it. The new instruction includes only operations on previously declared array, so the List is not needed. The code needs some modifications in that case.
 
