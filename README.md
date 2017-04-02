@@ -6,4 +6,5 @@ The uploaded code is made using an old instruction where you have to declare a L
 
 # TEST_4
 The code in this instruction relies heavily on strings, so you absolutely mustn't copy it directly during class. That is because it contains many Console.WriteLine() instructions that display text in Console and make copies of the same code immediately visible. 
+
 The instruction doesn't specify in what manner you should compare the two strings, so in the code you can find two kinds of comparison - one made by using String.Compare method (to "alphabetically" compare two strings) and the second using String.Length method comparing the length value of two strings. I assume that you can use either or both of them in your code, so you can decide by yourself which seems more appropriate.
