@@ -15,4 +15,4 @@ The instruction doesn't specify in what manner you should compare the two string
 # TEST_5
 This program is kinda tricky, but once you understand it, you will get the general idea behind object programming. Think of 3 methods that are created at the start, as a "standalone" parts of code, made for one purpose (calculating sum, mean and displaying array values). The first two methods need a input variable (float[] tab) to run the calculations included in them. The 3rd method is a void type method, which means that it doesn't return any value like the previous ones.
 
-It's always a good idea in programming to create parts of code like that, if you're going to need them many times in throught your program.
+It's always a good idea in programming to create parts of code like that, if you're going to need them many times in throught your program. Usually if you're constantly repeating the same instruction lines in your code, you're probably doing something wrong. This way the code is much more "cleaner" and the debugging process is easier.
