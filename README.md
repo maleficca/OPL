@@ -16,3 +16,8 @@ The instruction doesn't specify in what manner you should compare the two string
 This program is kinda tricky, but once you understand it, you will get the general idea behind object programming. Think of 3 methods that are created at the start, as a "standalone" parts of code, made for one purpose (calculating sum, mean and displaying array values). The first two methods need a input variable (float[] tab) to run the calculations included in them. The 3rd method is a void type method, which means that it doesn't return any value like the previous ones.
 
 It's always a good idea in programming to create parts of code like that, if you're going to need them many times in throught your program. Usually if you're constantly repeating the same instruction lines in your code, you're probably doing something wrong. This way the code is much more "cleaner" and the debugging process is easier.
+
+# TEST_6 and TEST_6_ver1
+I have two versions of this "Classes and Objects part 1" test and I uploaded code for both of them (Still, I have no idea which one is going to be on the actual test).
+
+Both programs are actually very similar, the Test_6 is longer just because there's more messages to show in it. The only new thing in here are functions associated with Classes in C# so you should have no problem in understanding it, if you read about Classes in C# and do some simple exercises with them. Also I didn't see the need to create Load() and InnerDim() functions in Test_6_ver1 code, because we can access these values quickly by just using some object references (like bearing.m_iD) and doing additional functions just for that felt really pointless to me.
