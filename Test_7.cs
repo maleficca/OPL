@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,6 +18,25 @@ namespace Test_7
         {
             m_cModuleType = 'n';
             m_iNoInputs = m_iNoOutputs = 0;
+        }
+
+        // ModuleType, NoInputs and NoOutputs parameters
+        public char ModuleType
+        {
+            get { return m_cModuleType; }
+            set { m_cModuleType = value; }
+        }
+
+        public int NoInputs
+        {
+            get { return m_iNoInputs; }
+            set { m_iNoInputs = value; }
+        }
+
+        public int NoOutputs
+        {
+            get { return m_iNoOutputs; }
+            set { m_iNoOutputs = value; }
         }
 
         // Constructor for defining CIOModule parameters
@@ -49,28 +68,18 @@ namespace Test_7
             m_aModuleArray = null;
         }
 
-        // Constructor for setting the name of the controller
-        public void SetName(string name)
+        // ControllerName parameter
+        public string ControllerName
         {
-            m_sControllerName = name;
+            get { return m_sControllerName; }
+            set { m_sControllerName = value; }
         }
 
-        // Constructor for adding modules to the controller
-        public void AddModule (int analogModulesNo, int digitalModulesNo, CIOModule analog, CIOModule digital)
+        // ModuleArray parameter
+        public CIOModule[] ModuleArray
         {
-            int moduleNo = analogModulesNo + digitalModulesNo;
-
-            m_aModuleArray = new CIOModule[moduleNo];
-
-            for (int x = 0; x < moduleNo; x++)
-            {
-                if (x < analogModulesNo)
-                {
-                    m_aModuleArray[x] = analog;
-                }
-                else m_aModuleArray[x] = digital;
-            }
-
+            get { return m_aModuleArray; }
+            set { m_aModuleArray = value; }
         }
 
         // Method for showing the constructor and module details
@@ -92,8 +101,7 @@ namespace Test_7
         static void Main(string[] args)
         {
             // Declaring variables and objects
-            int noAnalog, noDigital, analogIn, analogOut, digitalIn, digitalOut = 0;
-            string controllerName;
+            int noAnalog, noDigital = 0;
 
             CController controller = new CController();
             CIOModule analogModule = new CIOModule();
@@ -104,35 +112,41 @@ namespace Test_7
 
             // Input the controller name
             Console.WriteLine("\nPlease enter the name of your controller: ");
-            controllerName = Console.ReadLine();
-
-            // Set the controller name
-            controller.SetName(controllerName);
+            controller.ControllerName = Console.ReadLine();
 
             // Input number of analog modules and number of analog inputs/outputs in each
             Console.WriteLine("\nPlease enter the number of analog modules: ");
             noAnalog = int.Parse(Console.ReadLine());
-            Console.WriteLine("Please enter the number of analog inputs: ");
-            analogIn = int.Parse(Console.ReadLine());
-            Console.WriteLine("Please enter the number of analog outputs: ");
-            analogOut = int.Parse(Console.ReadLine());
 
-            // Set the analog module
-            analogModule.DefineCIOModule('A', analogIn, analogOut);
+            // Setting the digital module
+            analogModule.ModuleType = 'A';
+            Console.WriteLine("Please enter the number of analog inputs: ");
+            analogModule.NoInputs = int.Parse(Console.ReadLine());
+            Console.WriteLine("Please enter the number of analog outputs: ");
+            analogModule.NoOutputs = int.Parse(Console.ReadLine());
 
             // Input number of digital modules and number of digital inputs/outputs in each
             Console.WriteLine("\nPlease enter the number of digital modules: ");
             noDigital = int.Parse(Console.ReadLine());
-            Console.WriteLine("Please enter the number of digital inputs: ");
-            digitalIn = int.Parse(Console.ReadLine());
-            Console.WriteLine("Please enter the number of digital outputs: ");
-            digitalOut = int.Parse(Console.ReadLine());
 
-            // Set the analog module
-            digitalModule.DefineCIOModule('D', digitalIn, digitalOut);
+            // Setting the digital module
+            digitalModule.ModuleType = 'D';
+            Console.WriteLine("Please enter the number of digital inputs: ");
+            digitalModule.NoInputs = int.Parse(Console.ReadLine());
+            Console.WriteLine("Please enter the number of digital outputs: ");
+            digitalModule.NoOutputs = int.Parse(Console.ReadLine());
 
             // Adding modules
-            controller.AddModule(noAnalog, noDigital, analogModule, digitalModule);
+            controller.ModuleArray = new CIOModule[noAnalog+noDigital];
+
+            for (int x = 0; x < noAnalog + noDigital; x++)
+            {
+                if (x < noAnalog)
+                {
+                    controller.ModuleArray[x] = analogModule;
+                }
+                else controller.ModuleArray[x] = digitalModule;
+            }
 
             // Showing information about controller and modules
             controller.Show();
