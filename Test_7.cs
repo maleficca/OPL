@@ -39,14 +39,6 @@ namespace Test_7
             set { m_iNoOutputs = value; }
         }
 
-        // Constructor for defining CIOModule parameters
-        public void DefineCIOModule(char type, int inputs, int outputs)
-        {
-            m_cModuleType = type;
-            m_iNoInputs = inputs;
-            m_iNoOutputs = outputs;
-        }
-
         // Constructor for showing module details
         public void Show()
         {
