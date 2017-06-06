@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +8,8 @@ namespace Test_9
 {
     class CProfile
     {
+        private double m_dLength;
+        private double m_dWeightPerMeter;
         private char type;
 
         public char ProfileType
@@ -16,9 +18,35 @@ namespace Test_9
             set { type = value; }
         }
 
-        public float getOverallWeight(float length, float weightPerMeter)
+        public double Length
         {
-            return (length * weightPerMeter);
+            get { return m_dLength; }
+            set { m_dLength = value; }
+        }
+
+        public double WeightPerMeter
+        {
+            get { return m_dWeightPerMeter; }
+            set { m_dWeightPerMeter = value; }
+        }
+
+        public CProfile()
+        {
+            ProfileType = 'N';
+            Length = 0;
+            WeightPerMeter = 0;
+        }
+
+        public CProfile (double length, double weightPerMeter, char profileType)
+        {
+            Length = length;
+            WeightPerMeter = weightPerMeter;
+            ProfileType = profileType;
+        }
+
+        public double getOverallWeight()
+        {
+            return ((Length/1000) * WeightPerMeter);
         }
     }
 
@@ -53,7 +81,8 @@ namespace Test_9
             
         }
 
-        public CIBeam(float height, float width, float thickness)
+        public CIBeam(float height, float width, float thickness, double length, double weightPerMeter, char profileType)
+                    : base(length, weightPerMeter, profileType)
         {
             Height = height;
             Width = width;
@@ -64,7 +93,7 @@ namespace Test_9
         public void Show()
         {
             Console.WriteLine("\nBeam parameters: ");
-            Console.WriteLine("Height: {0} mm, Width: {1} mm, Thickness: {2} mm", Height, Width, Thickness);
+            Console.WriteLine("Height: {0} mm, Width: {1} mm, Thickness: {2} mm\nWeight/Meter: {3} kg/m, Overall weight: {4} kg", Height, Width, Thickness, WeightPerMeter, getOverallWeight());
         }
     }
         class CRoundTube: CProfile
@@ -90,7 +119,8 @@ namespace Test_9
                 ProfileType = 'T';
             }
 
-            public CRoundTube(float diameter, float thickness)
+            public CRoundTube(float diameter, float thickness, double length, double weightPerMeter, char profileType)
+                   : base(length, weightPerMeter, profileType)
             {
                 Diameter = diameter;
                 Thickness = thickness;
@@ -100,7 +130,7 @@ namespace Test_9
             public void Show()
             {
                 Console.WriteLine("\nRound tube parameters: ");
-                Console.WriteLine("Diameter: {0} mm, Thickness: {1} mm", Diameter, Thickness);
+                Console.WriteLine("Diameter: {0} mm, Thickness: {1} mm\nWeight/Meter: {2} kg/m, Overall weight: {3} kg", Diameter, Thickness, WeightPerMeter, getOverallWeight());
             }
         }
     
@@ -110,20 +140,17 @@ namespace Test_9
         {
             int profileNo;
             char profileType;
-            float overallMass = 0f, beamMass = 0f, tubeMass = 0f;
+            double overallMass = 0, beamMass = 0, tubeMass = 0;
             
-
             Console.WriteLine("Program stores information about construction profiles");
 
-            CIBeam exampleBeam = new CIBeam(80f, 80f, 9f);
-            CRoundTube exampleTube = new CRoundTube(42f, 3f);
+            CIBeam exampleBeam = new CIBeam(80f, 80f, 9f, 3000, 10.7, 'B');
+            CRoundTube exampleTube = new CRoundTube(42f, 3f, 2500, 2.89, 'T');
 
+            Console.WriteLine("Available profiles: ");
             exampleBeam.Show();
-            Console.WriteLine("Weight: {0} kg", exampleBeam.getOverallWeight(3f, 10.7f));
-
             exampleTube.Show();
-            Console.WriteLine("Weight: {0} kg", exampleTube.getOverallWeight(2.5f, 2.89f));
-
+            
             Console.Write("\nEnter the number of profiles in your construction: ");
             profileNo = int.Parse(Console.ReadLine());
 
@@ -152,13 +179,13 @@ namespace Test_9
             {
                 if (x.ProfileType == 'B')
                 {
-                    overallMass += x.getOverallWeight(3f, 10.7f);
-                    beamMass += x.getOverallWeight(3f, 10.7f);
+                    overallMass += x.getOverallWeight();
+                    beamMass += x.getOverallWeight();
                 }
                 else
                 {
-                    overallMass += x.getOverallWeight(2.5f, 2.89f);
-                    tubeMass += x.getOverallWeight(2.5f, 2.89f);
+                    overallMass += x.getOverallWeight();
+                    tubeMass += x.getOverallWeight();
                 }
             }
 
